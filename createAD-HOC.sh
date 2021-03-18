@@ -1,5 +1,13 @@
 echo '';
+#nameRed;
 read -p "Escriba el nombre de la red: " nameRed;
+#while[-z $nameRed]
+#do
+#echo '';
+#read -p "Escriba el nombre de la red: " nameRed;
+#done
+
+
 echo '';
 read -sp "Escriba la contraseña de la red: " passRed;
 

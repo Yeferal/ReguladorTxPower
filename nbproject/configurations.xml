@@ -12,7 +12,6 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>archivo.c</itemPath>
       <itemPath>main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -43,8 +42,6 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="archivo.c" ex="false" tool="0" flavor2="0">
-      </item>
       <item path="configutationRed.sh" ex="false" tool="3" flavor2="0">
       </item>
       <item path="createAD-HOC.sh" ex="false" tool="3" flavor2="0">
@@ -80,8 +77,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="archivo.c" ex="false" tool="0" flavor2="0">
-      </item>
       <item path="configutationRed.sh" ex="false" tool="3" flavor2="0">
       </item>
       <item path="createAD-HOC.sh" ex="false" tool="3" flavor2="0">

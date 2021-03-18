@@ -13,16 +13,19 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
+#include <unistd.h>
+
 
 #define COMANDOTXPWR "iw dev wlp2s0 station dump | grep signal:"
-#define CAMBIOTXPWR "sudo iwconfig wlp2s0 txpower ";
-#define DOWNINTERFACE "sudo ifconfig wlp2s0 down";
-#define UPINTERFACE "sudo ifconfig wlp2s0 up";
-#define MINTXPWR 1;
-#define MAXTXPWR 22;
+#define CAMBIOTXPWR "sudo iwconfig wlp2s0 txpower "
+#define DOWNINTERFACE "sudo ifconfig wlp2s0 down"
+#define UPINTERFACE "sudo ifconfig wlp2s0 up"
+#define MINTXPWR 1
+#define MAXTXPWR 22
 
-char* txtsplit[];
+char* txtsplit[100];
 char* datosTx[3];
 
 char* splitTxPower(char texto[], char delimiter[]);
@@ -90,7 +93,7 @@ char* splitTxPower(char texto[], char delimiter[]){
         ptr = strtok(NULL, delim);
     }
     
-    return str;
+    return *str;
 }
 
 char * readOutput(char comando[]){
@@ -110,7 +113,14 @@ char * readOutput(char comando[]){
 }
 
 void controlarPotencia(char interfaz[]){
-    
+    bool cierto = true;
+    while (cierto) {
+        
+        
+        
+        usleep(3 * 1000000);
+    }
+
 }
 
 
