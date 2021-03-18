@@ -16,27 +16,38 @@
 #include <string.h>
 
 #define COMANDOTXPWR "iw dev wlp2s0 station dump | grep signal:"
-//#define PRD "        signal:         -61 [-61, -64] dBm"
+#define CAMBIOTXPWR "sudo iwconfig wlp2s0 txpower ";
+#define DOWNINTERFACE "sudo ifconfig wlp2s0 down";
+#define UPINTERFACE "sudo ifconfig wlp2s0 up";
+#define MINTXPWR 1;
+#define MAXTXPWR 22;
 
-char * txtsplit[];
+char* txtsplit[];
+char* datosTx[3];
 
 char* splitTxPower(char texto[], char delimiter[]);
 char * readOutput(char comando[]);
+void controlarPotencia();
 
 int main(int argc, char** argv) {
     
-    //printf(COMANDOTXPWR);
-    printf("\n");
-    //char str[] = system(COMANDOTXPWR);
-    
-    //printf(str);
     char * txt = readOutput(COMANDOTXPWR);
     printf(txt);
     splitTxPower(txt," signal:[]dBm\t,");
     printf("\n--------------\n");
-    printf(txtsplit[0]);
-    printf(txtsplit[1]);
-    printf(txtsplit[2]);
+    int dato1 = atoi(txtsplit[0]);
+    int dato2 = atoi(txtsplit[1]);
+    int dato3 = atoi(txtsplit[2]);
+    
+    //datosTx[3];
+    datosTx[0] = dato1;
+    datosTx[1] = dato2;
+    datosTx[2] = dato3;
+    
+    printf("%i",datosTx[0]);
+    //printf("%i",datosTx[1]);
+    //printf("%i",datosTx[2]);
+    
     printf("\n--------------\n");
     return (EXIT_SUCCESS);
 }
@@ -98,6 +109,8 @@ char * readOutput(char comando[]){
     return texto;
 }
 
-
+void controlarPotencia(char interfaz[]){
+    
+}
 
 

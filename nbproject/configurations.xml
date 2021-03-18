@@ -25,6 +25,10 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>configutationRed.sh</itemPath>
+    <itemPath>createAD-HOC.sh</itemPath>
+    <itemPath>installTools.sh</itemPath>
+    <itemPath>my_wlan.conf</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -36,7 +40,15 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="configutationRed.sh" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="createAD-HOC.sh" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="installTools.sh" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="my_wlan.conf" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -59,7 +71,15 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="configutationRed.sh" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="createAD-HOC.sh" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="installTools.sh" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="my_wlan.conf" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
