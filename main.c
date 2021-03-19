@@ -18,7 +18,7 @@
 #include <unistd.h>
 
 
-#define COMANDOTXPWR "iw dev wlp2s0 station dump | grep signal:"
+#define COMANDOTXPWR "iw dev wlp2s0 station get 8e:10:f0:45:9d:a4 | grep signal:"
 #define CAMBIOTXPWR "sudo iwconfig wlp2s0 txpower "
 #define DOWNINTERFACE "sudo ifconfig wlp2s0 down"
 #define UPINTERFACE "sudo ifconfig wlp2s0 up"
@@ -26,14 +26,24 @@
 #define MAXTXPWR 22
 
 char* txtsplit[100];
-char* datosTx[3];
+int* datosTx[3];
 
-char* splitTxPower(char texto[], char delimiter[]);
+void splitTxPower(char texto[], char delimiter[]);
 char * readOutput(char comando[]);
 void controlarPotencia();
 
 int main(int argc, char** argv) {
+
+    char* txttx = readOutput("sudo iwconfig wlp2s0 txpower 6");
+    printf(txttx);
+
+    char* txtiw = readOutput("sudo iwconfig wlp2s0");
+    printf(txtiw);
+
+    int txtmp = 6;
+
     
+
     char * txt = readOutput(COMANDOTXPWR);
     printf(txt);
     splitTxPower(txt," signal:[]dBm\t,");
@@ -43,19 +53,69 @@ int main(int argc, char** argv) {
     int dato3 = atoi(txtsplit[2]);
     
     //datosTx[3];
-    datosTx[0] = dato1;
-    datosTx[1] = dato2;
-    datosTx[2] = dato3;
+    //datosTx[0] = dato1;
+    //datosTx[1] = dato2;
+    //datosTx[2] = dato3;
     
-    printf("%i",datosTx[0]);
-    //printf("%i",datosTx[1]);
-    //printf("%i",datosTx[2]);
+    printf("Tx=%d   ,Rx =%d",txtmp,dato2);
+    //printf("%d",datosTx[1]);
+    //printf("%d",*datosTx[2]);
     
     printf("\n--------------\n");
+    
+    bool cierto = true;
+    while (cierto) {
+
+	char * txts = readOutput(COMANDOTXPWR);
+    	printf(txts);
+    	splitTxPower(txts," signal:[]dBm\t,");
+    	printf("\n--------------\n");
+    	int dato11 = atoi(txtsplit[0]);
+    	int dato12 = atoi(txtsplit[1]);
+    	int dato13 = atoi(txtsplit[2]);	
+	if(dato12<(-51)){
+	    if(txtmp>2 && txtmp<20){
+	       txtmp = txtmp -3;
+	    }else{
+	       //txtmp = txtmp-1;
+	    }
+	}else{
+	    if(txtmp<20){
+	       txtmp = txtmp +3;
+	    }else{
+	       //txtmp = txtmp +1;
+	    }
+	}
+
+	txt = readOutput(COMANDOTXPWR);
+	splitTxPower(txts," signal:[]dBm\t,");
+    	dato12 = atoi(txtsplit[1]);
+	char* comtx = malloc(500) ;
+	char ll[20];
+	sprintf(ll,"%d",txtmp);	
+	
+	strcat(comtx,"sudo iwconfig wlp2s0 txpower ");
+	strcat(comtx,ll);
+	//comtx ="sudo iwconfig wlp2s0 txpower ";
+	//printf("%s",comtx);
+	//strcat(comtx," 3 333");
+
+	txttx= readOutput(comtx);
+    	//printf(txttxd);
+	
+	txtiw = readOutput("sudo iwconfig wlp2s0 | grep Tx-Power");
+    	//printf(txtiw2);        
+        printf("\n--------------\n");
+        printf("Tx=%d   ,Rx =%d ",txtmp,dato12);
+        printf("\n--------------\n");
+        usleep(5 * 1000000);
+    }
+
+
     return (EXIT_SUCCESS);
 }
 
-char* splitTxPower(char texto[], char delimiter[]){
+void splitTxPower(char texto[], char delimiter[]){
     int tamanio = strlen(texto);
     int tamaniod = strlen(delimiter);
     char str[tamanio];
@@ -93,7 +153,7 @@ char* splitTxPower(char texto[], char delimiter[]){
         ptr = strtok(NULL, delim);
     }
     
-    return *str;
+   // return str;
 }
 
 char * readOutput(char comando[]){
